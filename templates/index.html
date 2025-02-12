@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detector</title>
+</head>
+<body>
+    <h2>Upload an Image for Deepfake Detection</h2>
+    <input type="file" id="imageInput">
+    <button onclick="uploadImage()">Detect</button>
+    <p id="result"></p>
+
+    <script>
+        async function uploadImage() {
+            const input = document.getElementById("imageInput");
+            if (input.files.length === 0) {
+                alert("Please select an image first.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", input.files[0]);
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/predict/", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+                document.getElementById("result").innerText = `Prediction: ${data.label} (Score: ${data.deepfake_score})`;
+            } catch (error) {
+                document.getElementById("result").innerText = "Error in prediction.";
+            }
+        }
+    </script>
+</body>
+</html>

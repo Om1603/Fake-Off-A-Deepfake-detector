@@ -1,0 +1,7 @@
+footer {
+    background-color: #090809; /* Ensures footer stays dark */
+    padding: 20px 0;
+    text-align: center;
+    color: #bbb;
+    margin-top: 0px;
+}

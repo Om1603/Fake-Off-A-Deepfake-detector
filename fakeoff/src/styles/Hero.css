@@ -1,0 +1,124 @@
+/* Full-screen hero container centered using flexbox */
+.hero {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflow from the animated background */
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pseudo-element for the background image */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient overlay on the background image */
+    background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)),
+        url('../assets/back3_img.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Fixed for a parallax effect */
+    z-index: -1;
+    /* Zoom animation */
+    animation: zoomIn 5s ease-in-out forwards 1s;
+}
+
+/* Text content container centered and laid out vertically */
+.hero .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Hero heading styles with typewriter animation */
+.hero h2 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    overflow: hidden;       /* Hide the overflowing text during typing */
+    white-space: nowrap;    /* Prevent text from breaking */
+    border-right: 2px solid #fff; /* Create a caret effect */
+    width: 0; /* Start with zero width */
+    animation: typing 2.7s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+/* Hero paragraph styles with delayed fade-in */
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeInText 1s forwards 3.5s; /* Start after the typewriter completes */
+}
+
+/* Button styling with delayed fade-in */
+.hero a.btn {
+    padding: 12px 30px;
+    background-image: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    border-radius: 30px;
+    font-size: 16px;
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeInText 1s forwards 4.5s; /* Appear after the paragraph */
+}
+
+/* Button hover effect */
+.hero a.btn:hover {
+    background-image: linear-gradient(to right, #7025fc, #6a11cb);
+}
+
+/* Zoom-in animation for the background image */
+@keyframes zoomIn {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+/* Typing animation keyframes */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 72%;
+    }
+}
+
+/* Blinking caret effect */
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #fff;
+    }
+}
+
+/* Fade-in animation with a slight upward movement */
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

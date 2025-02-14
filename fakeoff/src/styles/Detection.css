@@ -2,7 +2,7 @@
 .detection {
     padding: 80px 0;
     text-align: center;
-    background-color: #090809;
+    
 }
 
 .detection h2 {
@@ -39,4 +39,5 @@
     font-weight: 500;
     color: #4CAF50;
 }
+
 

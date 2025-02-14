@@ -50,6 +50,7 @@
     white-space: nowrap;    /* Prevent text from breaking */
     border-right: 2px solid #fff; /* Create a caret effect */
     width: 0; /* Start with zero width */
+    max-width: 870px;
     animation: typing 2.7s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Detection.css';
+import '../styles/global.css';
 
 const Detection = () => {
     const [result, setResult] = useState('');

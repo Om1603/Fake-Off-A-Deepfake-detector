@@ -15,9 +15,9 @@ const Header = () => {
             </div>
             <nav className="header-nav">
                 <ul>
-                    <li><a href="#what-is-fakeoff">What is FakeOff?</a></li>
-                    <li><a href="#detection">Detection</a></li>
-                    <li><a href="#what-we-offer">What We Offer</a></li>
+                    <li><a href="/#what-is-fakeoff">What is FakeOff?</a></li>
+                    <li><a href="/detection">Deepfake Detection</a></li>
+                    <li><a href="/#what-we-offer">What We Offer</a></li>
                 </ul>
             </nav>
         </header>

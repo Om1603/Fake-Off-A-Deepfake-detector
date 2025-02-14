@@ -11,7 +11,7 @@ const Hero = () => {
         <p className="animate__animated animate__fadeIn animate__delay-1s">
           FakeOff uses cutting-edge AI to detect and prevent deepfake content.
         </p>
-        <a href="#detection" className="btn animate__animated animate__fadeIn animate__delay-2s">
+        <a href="/detection" className="btn animate__animated animate__fadeIn animate__delay-2s">
           Get Started
         </a>
       </div>

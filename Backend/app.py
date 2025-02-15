@@ -4,8 +4,6 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 import io
-import os
-import requests
 
 app = FastAPI()
 
@@ -18,35 +16,11 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-# Model Download Configuration
-MODEL_URL = "https://github.com/Om1603/Fake-Off-A-Deepfake-detector/releases/download/v1/deepfake_model.h5"
-MODEL_PATH = "models/deepfake_model.h5"
-
-# Ensure the 'models' directory exists
-os.makedirs("models", exist_ok=True)
-
-# Download model if not already present
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model...")
-    response = requests.get(MODEL_URL, stream=True)
-    with open(MODEL_PATH, "wb") as file:
-        for chunk in response.iter_content(chunk_size=1024):
-            file.write(chunk)
-    print("Model downloaded.")
-
-# Load the model once at startup
-try:
-    model = tf.keras.models.load_model(MODEL_PATH)
-    print("Model loaded successfully.")
-except Exception as e:
-    print(f"Error loading model: {e}")
-    model = None  # Set model to None if it fails to load
+# Load the trained model
+model = tf.keras.models.load_model("models/deepfake_model.h5")  # Update path
 
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
-    if model is None:
-        return {"error": "Model not loaded properly. Please check the logs."}
-
     try:
         # Read and preprocess image
         contents = await file.read()

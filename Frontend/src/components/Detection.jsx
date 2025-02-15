@@ -58,7 +58,7 @@ const Detection = () => {
         formData.append("file", file);
 
         try {
-            const response = await fetch("https://api.fakeoff.in/predict//predict/", {
+            const response = await fetch("https://api.fakeoff.in/predict/", {
                 method: "POST",
                 body: formData,
             });

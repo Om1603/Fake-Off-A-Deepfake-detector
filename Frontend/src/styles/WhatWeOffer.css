@@ -1,43 +1,64 @@
-/* What We Offer Section */
-.what-we-offer {
+/* Why FakeOff Section */
+.why-fakeoff {
     padding: 80px 0;
     text-align: center;
-    background-color: #090809;
 }
 
-.what-we-offer h2 {
-    font-size: 36px;
+.why-fakeoff h2 {
+    font-size: 48px;
     margin-bottom: 40px;
-    color: #333;
+    color: #fff;
+}
+
+.why-fakeoff h2 .highlight {
+    color: #6a11cb;
+    position: relative;
+    display: inline-block;
+}
+
+.why-fakeoff h2 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #6a11cb;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.why-fakeoff h2:hover .highlight::after {
+    transform: scaleX(1);
 }
 
 .offer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .offer {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    transform-origin: center;
-}
-
-.offer:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .offer h3 {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 15px;
-    color: #4CAF50;
+    color: #6a11cb;
 }
 
 .offer p {
-    font-size: 16px;
-    color: #666;
+    font-size: 14px;
+    color: #fff;
 }

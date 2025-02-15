@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "react-router-dom": "^7.1.5",
-    "react-tsparticles": "^2.12.2",
-    "tsparticles-slim": "^2.12.0"
-  }
-}

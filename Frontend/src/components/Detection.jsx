@@ -58,7 +58,7 @@ const Detection = () => {
         formData.append("file", file);
 
         try {
-            const response = await fetch("http://64.227.159.46:8000/predict/", {
+            const response = await fetch("https://64.227.159.46:8000/predict/", {
                 method: "POST",
                 body: formData,
             });

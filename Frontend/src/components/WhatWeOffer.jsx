@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/WhatWeOffer.css';
 
 const WhatWeOffer = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const currentRef = sectionRef.current;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true); // Set visibility to true
+                        observer.unobserve(currentRef); // Stop observing after animation
+                    }
+                });
+            },
+            { threshold: 0.1 } // Trigger when 10% of the section is visible
+        );
+
+        if (currentRef) {
+            observer.observe(currentRef);
+        }
+
+        return () => {
+            if (currentRef) {
+                observer.unobserve(currentRef);
+            }
+        };
+    }, []);
+
     const offers = [
         {
             title: "Real-Time Detection",
@@ -41,11 +69,11 @@ const WhatWeOffer = () => {
     };
 
     return (
-        <section id="why-fakeoff" className="why-fakeoff">
+        <section id="why-fakeoff" className="why-fakeoff" ref={sectionRef}>
             <div className="container">
                 <motion.h2 
                     initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5 }}
                 >
                     Why <span className="highlight">FakeOff</span>?
@@ -54,7 +82,7 @@ const WhatWeOffer = () => {
                     className="offer-grid"
                     variants={containerVariants}
                     initial="hidden"
-                    animate="visible"
+                    animate={isVisible ? "visible" : "hidden"}
                 >
                     {offers.map((offer, index) => (
                         <motion.div

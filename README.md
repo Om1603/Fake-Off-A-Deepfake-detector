@@ -20,14 +20,20 @@ FakeOff is an AI-powered deepfake detection tool that helps users identify wheth
 🔄 Video upload support for deepfake detection.\
 🎥 Live video stream detection.\
 🧠 Model improvements for better accuracy.\
-📊 Enhanced UI with better visualization of results.
+📊 Enhanced UI with better visualization of results.\
+📱 Optimizing the website for mobile devices.
 
 ## 🏗️ Tech Stack
 
 - **Frontend:** React.js
 - **Backend:** FastAPI
 - **Machine Learning:** TensorFlow, Keras
-- **Deployment:** DigitalOcean (Upcoming)
+- **Deployment:** DigitalOcean
+
+## 🌎 Live Deployment
+
+🚀 Website: [FakeOff](https://fakeoff.in)\
+🚀 API: [FakeOff API](https://api.fakeoff.in)
 
 ## 🚀 Getting Started
 
@@ -60,10 +66,6 @@ npm start
 2. Upload an image.
 3. Click "Detect" to get the deepfake score.
 4. Get results instantly!
-
-## 🌎 Deployment
-
-We are working on hosting the project on **DigitalOcean** with a custom domain `fakeoff.in`.
 
 ## 🤝 Contributing
 

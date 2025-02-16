@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/WhatIsFakeOff.css';
-import logoImage from '../assets/Fake.png'; // Make sure this path is correct
+import logoImage from '../assets/fak2.png'; // Make sure this path is correct
 
 const WhatIsFakeOff = () => {
   const sectionRef = useRef(null);
@@ -40,10 +40,17 @@ const WhatIsFakeOff = () => {
           </span>
         </h2>
         <p>
-          FakeOff is a leading deepfake detection service that leverages advanced AI to safeguard digital content. Our mission is to protect individuals and organizations from the growing threat of deepfake technology.
+        FakeOff is an AI-powered deepfake detection platform designed to help users identify manipulated images with accuracy and ease.
           <br /><br />
-          By continuously evolving our detection algorithms, we provide state-of-the-art protection against multimedia manipulation. Join us in the fight against digital misinformation and help secure a trusted digital future.
+          As deepfake technology evolves, so does the risk of misinformation and digital fraud. FakeOff leverages advanced machine learning to analyze images and detect signs of manipulation, providing users with a confidence score to assess authenticity.
+          <br /><br />
+          We are committed to improving our detection capabilities by continuously refining our algorithms and expanding support for videos and live detection.
+          <br /><br />
+          Join us in the fight against digital deception. 
+          <br /><br />
+          <a href="/detection" className="btn animate__animated animate__fadeIn animate__delay-2s">Try FakeOff today</a>
         </p>
+        
       </div>
       <div className="fakeoff-demo">
         <img src={logoImage} alt="FakeOff Logo" className="logo-image" />

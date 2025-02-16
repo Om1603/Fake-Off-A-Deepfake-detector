@@ -105,6 +105,25 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.what-is-fakeoff a.btn {
+    padding: 12px 30px;
+    background-image: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    border-radius: 30px;
+    
+    font-size: 16px;
+    text-decoration: none;
+    margin-top:30px;
+    opacity: 0;
+    animation: fadeInText 1s forwards 2.4s; /* Appear after the paragraph */
+    align-items: center;
+    text-align: center;
+}
+
+/* Button hover effect */
+.what-is-fakeoff a.btn:hover {
+    background-image: linear-gradient(to right, #7025fc, #6a11cb);
+}
 /* Keyframes for logo entrance */
 @keyframes logoFadeIn {
     from {

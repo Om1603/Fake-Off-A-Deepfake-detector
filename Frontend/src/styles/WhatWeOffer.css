@@ -2,6 +2,7 @@
 .why-fakeoff {
     padding: 80px 0;
     text-align: center;
+    overflow-x: hidden; /* Prevent horizontal scroll issues */
 }
 
 .why-fakeoff h2 {
@@ -32,9 +33,10 @@
     transform: scaleX(1);
 }
 
+/* Fixed Grid Layout */
 .offer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     justify-content: center;
     max-width: 1000px;
@@ -42,6 +44,7 @@
     padding: 0 20px;
 }
 
+/* Offer Card */
 .offer {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 25px;
@@ -61,4 +64,29 @@
 .offer p {
     font-size: 14px;
     color: #fff;
+}
+
+/* ======= RESPONSIVE FIXES ======= */
+@media (max-width: 768px) {
+    .offer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .why-fakeoff h2 {
+        font-size: 32px;
+    }
+
+    .offer {
+        padding: 20px;
+    }
+
+    .offer h3 {
+        font-size: 18px;
+    }
+
+    .offer p {
+        font-size: 12px;
+    }
 }

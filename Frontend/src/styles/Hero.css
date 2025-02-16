@@ -37,21 +37,23 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: 0 20px; /* Add padding for better spacing on mobile */
 }
 
 /* Hero heading styles with typewriter animation */
 .hero h2 {
     font-size: 48px;
     font-weight: bold;
-    margin-bottom: 20px;
+    
     font-family: 'Poppins', sans-serif;
-    display: inline-block;
-    overflow: hidden;       /* Hide the overflowing text during typing */
-    white-space: nowrap;    /* Prevent text from breaking */
+    
+    overflow: hidden;   
+        /* Hide the overflowing text during typing */
+    white-space:nowrap;   
     border-right: 2px solid #fff; /* Create a caret effect */
-    width: 0; /* Start with zero width */
-    max-width: 870px;
-    animation: typing 2.7s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+    width: 100%; /* Start with zero width */
+    max-width: 860px; /* Allow full width on smaller screens */
+    animation: typing 2.8s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
 }
 
 /* Hero paragraph styles with delayed fade-in */
@@ -98,7 +100,7 @@
         width: 0;
     }
     to {
-        width: 72%;
+        width: 100%; /* Adjust to 100% for smaller screens */
     }
 }
 
@@ -121,5 +123,39 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 25px; /* Smaller font size for mobile */
+         /* Allow text to wrap to the next line */
+        white-space:normal;
+         /* Center-align text */
+        
+    }
+
+    .hero p {
+        font-size: 16px; /* Smaller font size for mobile */
+    }
+
+    .hero a.btn {
+        font-size: 14px; /* Smaller font size for mobile */
+        padding: 10px 20px; /* Smaller padding for mobile */
+    }
+
+    .hero::before {
+        animation: zoomIn 3s ease-in-out forwards 1s; /* Faster zoom for mobile */
+    }
+
+    /* Typing animation for mobile */
+    @keyframes typing-mobile {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%; /* Adjust to 100% for smaller screens */
+        }
     }
 }

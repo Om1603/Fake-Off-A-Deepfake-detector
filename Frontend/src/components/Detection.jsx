@@ -1,27 +1,22 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion'; // Import motion from framer-motion
-import '../styles/Detection.css';
+import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import "../styles/Detection.css";
 
 const Detection = () => {
-    const [result, setResult] = useState('');
+    const [result, setResult] = useState("");
     const [file, setFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
+    const [videoPreview, setVideoPreview] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
     const [showDetectButton, setShowDetectButton] = useState(true);
     const [showChooseAnotherButton, setShowChooseAnotherButton] = useState(false);
     const fileInputRef = useRef(null);
     const dropAreaRef = useRef(null);
 
-    const titleText = "Deepfake Detection".split(" "); // Split title into words
-    titleText.splice(1, 0, "\u00A0"); // Add a space between "Deepfake" and "Detection"
-
-    const text2 = result.split(" ");
-
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         if (selectedFile) {
             setFile(selectedFile);
-            setImagePreview(URL.createObjectURL(selectedFile));
+            setVideoPreview(URL.createObjectURL(selectedFile));
         }
     };
 
@@ -30,29 +25,29 @@ const Detection = () => {
         const droppedFile = event.dataTransfer.files[0];
         if (droppedFile) {
             setFile(droppedFile);
-            setImagePreview(URL.createObjectURL(droppedFile));
+            setVideoPreview(URL.createObjectURL(droppedFile));
         }
-        dropAreaRef.current.classList.remove('dragover');
+        dropAreaRef.current.classList.remove("dragover");
     };
 
     const handleDragOver = (event) => {
         event.preventDefault();
-        dropAreaRef.current.classList.add('dragover');
+        dropAreaRef.current.classList.add("dragover");
     };
 
     const handleDragLeave = () => {
-        dropAreaRef.current.classList.remove('dragover');
+        dropAreaRef.current.classList.remove("dragover");
     };
 
-    const uploadImage = async () => {
+    const uploadVideo = async () => {
         if (!file) {
-            alert("Please select an image first.");
+            alert("Please select a video first.");
             return;
         }
 
         setIsScanning(true);
         setShowDetectButton(false);
-        setResult('');
+        setResult("");
 
         const formData = new FormData();
         formData.append("file", file);
@@ -68,7 +63,7 @@ const Detection = () => {
 
             const labelColor = data.label === "Real" ? "green" : "red";
             setResult(
-                `Your Picture Is Likely a <span class="result-label" style="color: ${labelColor}; ">${data.label}</span> Image `
+                `Your Video Is Likely a <span class="result-label" style="color: ${labelColor};">${data.label}</span> Video `
             );
 
             setShowChooseAnotherButton(true);
@@ -84,51 +79,47 @@ const Detection = () => {
         <section id="detection" className="detection">
             <div className="container">
                 <h2 className="title">
-                    {titleText.map((word, index) => (
-                        <motion.span
-                            key={index}
-                            initial={{ opacity: 0, y: 0 }} // Start hidden and slightly below
-                            animate={{ opacity: 1, y: 0 }} // Fade in and move up
-                            transition={{
-                                duration:1, // Animation duration
-                                delay: index / 5, // Delay between words
-                            }}
-                        >
-                            {word}{"  "}
-                        </motion.span>
-                    ))}
+                    <motion.span
+                        initial={{ opacity: 0, y: 0 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                    >
+                        Deepfake Detection{" "}
+                    </motion.span>
                 </h2>
-                <p className="subtitle animate-text-delay">
-                    Drag & drop an image or click to upload.
-                </p>
-                <div 
-                    className={`detection-box ${imagePreview ? 'has-preview' : ''}`}
+                <p className="subtitle">Drag & drop a video or click to upload.</p>
+                <div
+                    className={`detection-box ${videoPreview ? "has-preview" : ""}`}
                     ref={dropAreaRef}
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                 >
-                    {!imagePreview ? (
+                    {!videoPreview ? (
                         <>
-                            <input 
-                                type="file" 
+                            <input
+                                type="file"
                                 ref={fileInputRef}
                                 onChange={handleFileChange}
-                                accept="image/*"
+                                accept="video/*"
                                 hidden
                             />
-                            <button 
-                                onClick={() => fileInputRef.current.click()} 
+                            <button
+                                onClick={() => fileInputRef.current.click()}
                                 className="upload-btn"
                             >
-                                Choose Image
+                                Choose Video
                             </button>
                             <p className="drag-text">or drag & drop here</p>
                         </>
                     ) : (
                         <>
-                            <div className="image-container">
-                                <img src={imagePreview} alt="Preview" className="image-preview" />
+                            <div className="video-container">
+                                <video
+                                    src={videoPreview}
+                                    controls
+                                    className="video-preview"
+                                />
                                 {isScanning && (
                                     <div className="scanning-overlay">
                                         <div className="scanning-line"></div>
@@ -136,28 +127,28 @@ const Detection = () => {
                                 )}
                             </div>
                             {showDetectButton && (
-                                <button onClick={uploadImage} className="detect-btn">
-                                    {isScanning ? 'Scanning...' : 'Detect Deepfake'}
+                                <button onClick={uploadVideo} className="detect-btn">
+                                    {isScanning ? "Scanning..." : "Detect Deepfake"}
                                 </button>
                             )}
                             {result && (
                                 <div className="result-container">
-                                    <p 
+                                    <p
                                         className="result animate-pop"
                                         dangerouslySetInnerHTML={{ __html: result }}
                                     />
                                     {showChooseAnotherButton && (
-                                        <button 
+                                        <button
                                             onClick={() => {
                                                 setFile(null);
-                                                setImagePreview(null);
-                                                setResult('');
+                                                setVideoPreview(null);
+                                                setResult("");
                                                 setShowDetectButton(true);
                                                 setShowChooseAnotherButton(false);
-                                            }} 
+                                            }}
                                             className="choose-another-btn"
                                         >
-                                            Choose Another Picture
+                                            Choose Another Video
                                         </button>
                                     )}
                                 </div>

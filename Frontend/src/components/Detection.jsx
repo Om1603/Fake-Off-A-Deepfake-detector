@@ -1,31 +1,39 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../styles/Detection.css";
 
 const Detection = () => {
     const [result, setResult] = useState("");
     const [file, setFile] = useState(null);
-    const [videoPreview, setVideoPreview] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
     const [showDetectButton, setShowDetectButton] = useState(true);
     const [showChooseAnotherButton, setShowChooseAnotherButton] = useState(false);
     const fileInputRef = useRef(null);
     const dropAreaRef = useRef(null);
 
+    // Clean up the video object URL when the component unmounts or the file changes
+    useEffect(() => {
+        return () => {
+            if (file) {
+                URL.revokeObjectURL(file);  // Revoke the object URL to free memory
+            }
+        };
+    }, [file]);
+
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
-        if (selectedFile) {
+        if (selectedFile && selectedFile.type.startsWith("video/")) {
             setFile(selectedFile);
-            setVideoPreview(URL.createObjectURL(selectedFile));
+        } else {
+            alert("Please upload a valid video file.");
         }
     };
 
     const handleDrop = (event) => {
         event.preventDefault();
         const droppedFile = event.dataTransfer.files[0];
-        if (droppedFile) {
+        if (droppedFile && droppedFile.type.startsWith("video/")) {
             setFile(droppedFile);
-            setVideoPreview(URL.createObjectURL(droppedFile));
         }
         dropAreaRef.current.classList.remove("dragover");
     };
@@ -89,13 +97,13 @@ const Detection = () => {
                 </h2>
                 <p className="subtitle">Drag & drop a video or click to upload.</p>
                 <div
-                    className={`detection-box ${videoPreview ? "has-preview" : ""}`}
+                    className={`detection-box`}
                     ref={dropAreaRef}
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                 >
-                    {!videoPreview ? (
+                    {!file ? (
                         <>
                             <input
                                 type="file"
@@ -114,23 +122,14 @@ const Detection = () => {
                         </>
                     ) : (
                         <>
-                            <div className="video-container">
-                                <video
-                                    src={videoPreview}
-                                    controls
-                                    className="video-preview"
-                                />
-                                {isScanning && (
-                                    <div className="scanning-overlay">
-                                        <div className="scanning-line"></div>
-                                    </div>
+                            <div className="uploaded-info">
+                                <p className="video-uploaded-text">Video Uploaded</p>
+                                {showDetectButton && (
+                                    <button onClick={uploadVideo} className="detect-btn">
+                                        {isScanning ? "Scanning..." : "Detect Deepfake"}
+                                    </button>
                                 )}
                             </div>
-                            {showDetectButton && (
-                                <button onClick={uploadVideo} className="detect-btn">
-                                    {isScanning ? "Scanning..." : "Detect Deepfake"}
-                                </button>
-                            )}
                             {result && (
                                 <div className="result-container">
                                     <p
@@ -141,7 +140,6 @@ const Detection = () => {
                                         <button
                                             onClick={() => {
                                                 setFile(null);
-                                                setVideoPreview(null);
                                                 setResult("");
                                                 setShowDetectButton(true);
                                                 setShowChooseAnotherButton(false);
